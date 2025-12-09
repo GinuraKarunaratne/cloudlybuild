@@ -253,3 +253,4 @@ class _FogMistPainter extends CustomPainter {
       animationValue != oldDelegate.animationValue ||
       visibility != oldDelegate.visibility;
 }
+

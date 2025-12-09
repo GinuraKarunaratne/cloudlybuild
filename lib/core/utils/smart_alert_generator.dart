@@ -263,3 +263,4 @@ class SmartAlertGenerator {
     return null;
   }
 }
+

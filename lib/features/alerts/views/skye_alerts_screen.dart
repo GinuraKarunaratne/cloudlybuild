@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/theme/skye_theme.dart';
 import '../../../data/models/weather_alert_model.dart';
 import '../viewmodels/alerts_viewmodel.dart';
 import '../../home/viewmodels/home_viewmodel.dart';
@@ -38,7 +39,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
     final homeState = ref.watch(homeProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0A), // Black background
+      backgroundColor: SkyeColors.deepSpace, // Black background
       body: SafeArea(
         child: Column(
           children: [
@@ -62,7 +63,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFF232125),
+                color: SkyeColors.cardColor,
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
@@ -74,7 +75,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
               ),
               child: const Icon(
                 Icons.arrow_back_rounded,
-                color: Color(0xFFFFFFFF),
+                color: SkyeColors.whitePure,
                 size: 24,
               ),
             ),
@@ -89,7 +90,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xFFFAFAFA),
+                    color: SkyeColors.whiteFA,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -97,7 +98,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
                   ref.watch(homeProvider).weather?.cityName ?? 'Your Location',
                   style: const TextStyle(
                     fontSize: 14,
-                    color: Color(0xFFF6F6F6),
+                    color: SkyeColors.whiteF6,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -116,7 +117,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircularProgressIndicator(
-              color: Color(0xFF3B82F6),
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
             SizedBox(height: 16),
             Text(
@@ -164,7 +165,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
             padding: const EdgeInsets.all(36),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color(0xFF232125),
+              color: SkyeColors.cardColor,
             ),
             child: const Icon(
               Icons.check_circle_outline_rounded,
@@ -178,7 +179,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w700,
-              color: Color(0xFFFAFAFA),
+              color: SkyeColors.whiteFA,
             ),
           ),
           const SizedBox(height: 12),
@@ -189,7 +190,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15,
-                color: Color(0xFFF6F6F6),
+                color: SkyeColors.whiteF6,
                 height: 1.6,
               ),
             ),
@@ -207,7 +208,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
     return Container(
       margin: const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
-        color: const Color(0xFF232125),
+        color: SkyeColors.cardColor,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
           color: severityColor,
@@ -228,7 +229,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
           Container(
             padding: const EdgeInsets.all(18),
             decoration: const BoxDecoration(
-              color: Color(0xFF1C1A1F),
+              color: SkyeColors.behindContainer,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
                 topRight: Radius.circular(16),
@@ -237,7 +238,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
             child: Row(
               children: [
                 Icon(
-                  Icons.warning_rounded,
+                  Icons.crisis_alert_rounded,
                   color: severityColor,
                   size: 28,
                 ),
@@ -248,14 +249,14 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFFFAFAFA),
+                      color: SkyeColors.whiteFA,
                     ),
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF232125),
+                    color: SkyeColors.cardColor,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: severityColor,
@@ -292,7 +293,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
                     _getCautionText(severity),
                     style: const TextStyle(
                       fontSize: 13,
-                      color: Color(0xFFF6F6F6),
+                      color: SkyeColors.whiteF6,
                       fontWeight: FontWeight.w600,
                       height: 1.4,
                     ),
@@ -308,7 +309,7 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
               margin: const EdgeInsets.fromLTRB(18, 0, 18, 18),
               padding: const EdgeInsets.symmetric(vertical: 10),
               decoration: BoxDecoration(
-                color: const Color(0xFF1C1A1F),
+                color: SkyeColors.behindContainer,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -340,13 +341,13 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
   Color _getSeverityColor(AlertSeverity severity) {
     switch (severity) {
       case AlertSeverity.extreme:
-        return const Color(0xFFEF4444);
+        return const Color.fromARGB(255, 174, 0, 0);
       case AlertSeverity.severe:
-        return const Color(0xFFF97316);
+        return const Color.fromARGB(255, 198, 82, 0);
       case AlertSeverity.moderate:
-        return const Color(0xFFFBBF24);
+        return const Color.fromARGB(255, 176, 126, 0);
       case AlertSeverity.minor:
-        return const Color(0xFF3B82F6);
+        return const Color.fromARGB(255, 0, 65, 169);
     }
   }
 
@@ -376,3 +377,4 @@ class _SkyeAlertsScreenState extends ConsumerState<SkyeAlertsScreen> {
     }
   }
 }
+

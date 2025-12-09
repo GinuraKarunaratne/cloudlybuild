@@ -329,3 +329,4 @@ class _RainDropsPainter extends CustomPainter {
       animationValue != oldDelegate.animationValue ||
       humidity != oldDelegate.humidity;
 }
+

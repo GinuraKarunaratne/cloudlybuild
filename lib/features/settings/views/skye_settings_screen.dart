@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/theme/skye_theme.dart';
 import '../viewmodels/settings_viewmodel.dart';
 import '../viewmodels/settings_state.dart';
 
@@ -13,7 +14,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
     final settingsState = ref.watch(settingsProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0A), // Black background
+      backgroundColor: SkyeColors.deepSpace, // Black background
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -28,7 +29,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                       child: Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF232125),
+                          color: SkyeColors.cardColor,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
@@ -40,7 +41,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                         ),
                         child: const Icon(
                           Icons.arrow_back_rounded,
-                          color: Color(0xFFFFFFFF),
+                          color: SkyeColors.whitePure,
                           size: 24,
                         ),
                       ),
@@ -56,7 +57,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFFFAFAFA),
+                              color: SkyeColors.whiteFA,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -65,7 +66,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                             'Customize your experience',
                             style: TextStyle(
                               fontSize: 12,
-                              color: Color(0xFFF6F6F6),
+                              color: SkyeColors.whiteF6,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -149,7 +150,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
       style: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w700,
-        color: Color(0xFFFAFAFA),
+        color: SkyeColors.whiteFA,
         letterSpacing: 0.5,
       ),
     );
@@ -167,7 +168,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
       child: Container(
         height: 140,
         decoration: BoxDecoration(
-          color: const Color(0xFF232125),
+          color: SkyeColors.cardColor,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -186,7 +187,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
               Icon(
                 icon,
                 size: 36,
-                color: const Color(0xFFFFFFFF),
+                color: SkyeColors.whitePure,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -196,7 +197,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFFFAFAFA),
+                      color: SkyeColors.whiteFA,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -205,7 +206,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFFF6F6F6),
+                      color: SkyeColors.whiteF6,
                     ),
                   ),
                 ],
@@ -229,7 +230,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: const Color(0xFF232125),
+          color: SkyeColors.cardColor,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -244,13 +245,13 @@ class SkyeSettingsScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: const Color(0xFF1C1A1F),
+                color: SkyeColors.behindContainer,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Icon(
                 icon,
                 size: 32,
-                color: const Color(0xFFFFFFFF),
+                color: SkyeColors.whitePure,
               ),
             ),
             const SizedBox(width: 20),
@@ -263,7 +264,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFFF6F6F6),
+                      color: SkyeColors.whiteF6,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -272,7 +273,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFFFAFAFA),
+                      color: SkyeColors.whiteFA,
                     ),
                   ),
                 ],
@@ -280,7 +281,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
             ),
             const Icon(
               Icons.chevron_right_rounded,
-              color: Color(0xFFFFFFFF),
+              color: SkyeColors.whitePure,
               size: 28,
             ),
           ],
@@ -301,7 +302,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: const Color(0xFF232125),
+        color: SkyeColors.cardColor,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -316,13 +317,13 @@ class SkyeSettingsScreen extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFF1C1A1F),
+              color: SkyeColors.behindContainer,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(
               icon,
               size: 32,
-              color: const Color(0xFFFFFFFF),
+              color: SkyeColors.whitePure,
             ),
           ),
           const SizedBox(width: 20),
@@ -335,7 +336,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xFFFAFAFA),
+                    color: SkyeColors.whiteFA,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -344,7 +345,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFFFAFAFA),
+                    color: SkyeColors.whiteFA,
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -352,7 +353,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                   description,
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Color(0xFFF6F6F6),
+                    color: SkyeColors.whiteF6,
                   ),
                 ),
               ],
@@ -422,7 +423,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF232125),
+        backgroundColor: SkyeColors.cardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
@@ -431,7 +432,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
           style: const TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.w700,
-            color: Color(0xFFFAFAFA),
+            color: SkyeColors.whiteFA,
           ),
         ),
         contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
@@ -448,11 +449,11 @@ class SkyeSettingsScreen extends ConsumerWidget {
                 margin: const EdgeInsets.only(bottom: 12),
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1C1A1F),
+                  color: SkyeColors.behindContainer,
                   borderRadius: BorderRadius.circular(14),
                   border: isSelected
                       ? Border.all(
-                          color: const Color(0xFFFFFFFF),
+                          color: SkyeColors.whitePure,
                           width: 2,
                         )
                       : null,
@@ -464,14 +465,14 @@ class SkyeSettingsScreen extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 17,
                         fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
-                        color: const Color(0xFFFAFAFA),
+                        color: SkyeColors.whiteFA,
                       ),
                     ),
                     const Spacer(),
                     if (isSelected)
                       const Icon(
                         Icons.check_circle_rounded,
-                        color: Color(0xFFFFFFFF),
+                        color: SkyeColors.whitePure,
                         size: 24,
                       ),
                   ],
@@ -484,3 +485,4 @@ class SkyeSettingsScreen extends ConsumerWidget {
     );
   }
 }
+

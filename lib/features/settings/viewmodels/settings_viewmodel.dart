@@ -73,3 +73,4 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
     );
   }
 }
+

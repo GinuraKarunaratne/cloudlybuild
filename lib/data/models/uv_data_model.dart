@@ -85,3 +85,4 @@ enum UVSafetyLevel {
   veryHigh,
   extreme,
 }
+

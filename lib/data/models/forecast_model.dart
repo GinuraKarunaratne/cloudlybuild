@@ -151,3 +151,4 @@ class DailyForecast {
     return weekdays[date.weekday - 1];
   }
 }
+

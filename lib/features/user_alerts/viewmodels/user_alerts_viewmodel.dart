@@ -80,3 +80,4 @@ class UserAlertsNotifier extends StateNotifier<UserAlertsState> {
     }
   }
 }
+

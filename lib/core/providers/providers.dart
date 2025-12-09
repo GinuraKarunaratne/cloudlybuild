@@ -40,3 +40,4 @@ final userAlertRepositoryProvider = Provider<UserAlertRepository>((ref) {
   final storageService = ref.read(storageServiceProvider);
   return UserAlertRepository(storageService);
 });
+

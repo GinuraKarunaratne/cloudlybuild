@@ -215,3 +215,4 @@ class _FlowingWindPainter extends CustomPainter {
       animationValue != oldDelegate.animationValue ||
       windSpeed != oldDelegate.windSpeed;
 }
+

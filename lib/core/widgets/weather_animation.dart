@@ -173,3 +173,4 @@ class _AnimatedWeatherIconState extends State<_AnimatedWeatherIcon>
     );
   }
 }
+

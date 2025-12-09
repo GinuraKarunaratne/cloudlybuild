@@ -117,3 +117,4 @@ enum WeatherCondition {
   snowy,
   thunderstorm,
 }
+

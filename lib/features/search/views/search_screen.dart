@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/theme/skye_theme.dart';
 import '../viewmodels/search_viewmodel.dart';
 import '../viewmodels/search_state.dart';
 import '../../home/viewmodels/home_viewmodel.dart';
@@ -38,7 +39,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     final searchState = ref.watch(searchProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0A),
+      backgroundColor: SkyeColors.deepSpace,
       body: SafeArea(
         child: Column(
           children: [
@@ -55,7 +56,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF232125),
+                        color: SkyeColors.cardColor,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -67,7 +68,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       ),
                       child: const Icon(
                         Icons.arrow_back_rounded,
-                        color: Color(0xFFFFFFFF),
+                        color: SkyeColors.whitePure,
                         size: 22,
                       ),
                     ),
@@ -80,7 +81,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     child: Container(
                       height: 46,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF232125),
+                        color: SkyeColors.cardColor,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -94,7 +95,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         controller: _searchController,
                         focusNode: _focusNode,
                         style: const TextStyle(
-                          color: Color(0xFFFFFFFF),
+                          color: SkyeColors.whitePure,
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                         ),
@@ -107,7 +108,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                           ),
                           prefixIcon: const Icon(
                             Icons.search_rounded,
-                            color: Color(0xFFFFFFFF),
+                            color: SkyeColors.whitePure,
                             size: 20,
                           ),
                           suffixIcon: _searchController.text.isNotEmpty
@@ -150,7 +151,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF232125),
+                        color: SkyeColors.cardColor,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -164,7 +165,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         Icons.filter_list_rounded,
                         color: searchState.regionFilter != RegionFilter.all
                             ? const Color(0xFF3B82F6)
-                            : const Color(0xFFFFFFFF),
+                            : SkyeColors.whitePure,
                         size: 22,
                       ),
                     ),
@@ -180,7 +181,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF232125),
+                        color: SkyeColors.cardColor,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -196,7 +197,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                             : Icons.favorite_border_rounded,
                         color: searchState.showFavoritesOnly
                             ? const Color(0xFF3B82F6)
-                            : const Color(0xFFFFFFFF),
+                            : SkyeColors.whitePure,
                         size: 22,
                       ),
                     ),
@@ -231,7 +232,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     showDialog(
       context: context,
       builder: (context) => Dialog(
-        backgroundColor: const Color(0xFF232125),
+        backgroundColor: SkyeColors.cardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -244,7 +245,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               const Text(
                 'Filter by Region',
                 style: TextStyle(
-                  color: Color(0xFFFFFFFF),
+                  color: SkyeColors.whitePure,
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
@@ -279,7 +280,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         decoration: BoxDecoration(
           color: isSelected
               ? const Color(0xFF3B82F6).withOpacity(0.2)
-              : const Color(0xFF0A0A0A),
+              : SkyeColors.deepSpace,
           borderRadius: BorderRadius.circular(12),
           border: isSelected
               ? Border.all(color: const Color(0xFF3B82F6), width: 2)
@@ -290,13 +291,13 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             Icon(
               icon,
               size: 20,
-              color: isSelected ? const Color(0xFF3B82F6) : const Color(0xFFFFFFFF),
+              color: isSelected ? const Color(0xFF3B82F6) : SkyeColors.whitePure,
             ),
             const SizedBox(width: 12),
             Text(
               label,
               style: TextStyle(
-                color: isSelected ? const Color(0xFF3B82F6) : const Color(0xFFFFFFFF),
+                color: isSelected ? const Color(0xFF3B82F6) : SkyeColors.whitePure,
                 fontSize: 14,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
               ),
@@ -327,7 +328,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             margin: const EdgeInsets.only(bottom: 12),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFF232125),
+              color: SkyeColors.cardColor,
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
@@ -364,7 +365,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       Text(
                         location.name,
                         style: const TextStyle(
-                          color: Color(0xFFFAFAFA),
+                          color: SkyeColors.whiteFA,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -373,7 +374,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       Text(
                         location.displayName,
                         style: const TextStyle(
-                          color: Color(0xFFF6F6F6),
+                          color: SkyeColors.whiteF6,
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
                         ),
@@ -434,7 +435,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              color: const Color(0xFF232125),
+              color: SkyeColors.cardColor,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Icon(
@@ -449,7 +450,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           Text(
             showingFavorites ? 'No favorites yet' : 'Search for a city',
             style: const TextStyle(
-              color: Color(0xFFFAFAFA),
+              color: SkyeColors.whiteFA,
               fontSize: 20,
               fontWeight: FontWeight.w600,
             ),
@@ -480,7 +481,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              color: const Color(0xFF232125),
+              color: SkyeColors.cardColor,
               borderRadius: BorderRadius.circular(20),
             ),
             child: const Icon(
@@ -493,7 +494,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           const Text(
             'Search failed',
             style: TextStyle(
-              color: Color(0xFFFAFAFA),
+              color: SkyeColors.whiteFA,
               fontSize: 20,
               fontWeight: FontWeight.w600,
             ),
@@ -522,7 +523,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     return await showDialog<String>(
       context: context,
       builder: (context) => Dialog(
-        backgroundColor: const Color(0xFF232125),
+        backgroundColor: SkyeColors.cardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -535,7 +536,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               const Text(
                 'Add Custom Name',
                 style: TextStyle(
-                  color: Color(0xFFFAFAFA),
+                  color: SkyeColors.whiteFA,
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
@@ -552,14 +553,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               const SizedBox(height: 16),
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF0A0A0A),
+                  color: SkyeColors.deepSpace,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: TextField(
                   controller: controller,
                   autofocus: true,
                   style: const TextStyle(
-                    color: Color(0xFFFFFFFF),
+                    color: SkyeColors.whitePure,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                   ),
@@ -613,3 +614,4 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     );
   }
 }
+

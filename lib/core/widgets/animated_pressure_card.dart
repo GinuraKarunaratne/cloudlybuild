@@ -195,3 +195,4 @@ class _PressureGaugePainter extends CustomPainter {
       animationValue != oldDelegate.animationValue ||
       pressure != oldDelegate.pressure;
 }
+

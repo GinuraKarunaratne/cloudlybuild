@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../../../core/theme/skye_theme.dart';
 import '../viewmodels/forecast_viewmodel.dart';
 import '../../home/viewmodels/home_viewmodel.dart';
 
@@ -53,7 +54,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
             width: 50,
             height: 5,
             decoration: BoxDecoration(
-              color: const Color(0xFF232125),
+              color: SkyeColors.cardColor,
               borderRadius: BorderRadius.circular(3),
             ),
           ),
@@ -70,7 +71,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xFFFAFAFA),
+                    color: SkyeColors.whiteFA,
                   ),
                 ),
                 GestureDetector(
@@ -78,12 +79,12 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                   child: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF232125),
+                      color: SkyeColors.cardColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Icon(
                       Icons.close_rounded,
-                      color: Color(0xFFFFFFFF),
+                      color: SkyeColors.whitePure,
                       size: 24,
                     ),
                   ),
@@ -100,7 +101,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
             child: Container(
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
-                color: const Color(0xFF232125),
+                color: SkyeColors.cardColor,
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: [
                   BoxShadow(
@@ -160,10 +161,10 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: isActive ? const Color(0xFF1C1A1F) : Colors.transparent,
+          color: isActive ? SkyeColors.behindContainer : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
           border: isActive
-              ? Border.all(color: const Color(0xFFFFFFFF), width: 1)
+              ? Border.all(color: SkyeColors.whitePure, width: 1)
               : null,
         ),
         child: Text(
@@ -171,7 +172,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 16,
-            color: isActive ? const Color(0xFFFAFAFA) : const Color(0xFFF6F6F6),
+            color: isActive ? SkyeColors.whiteFA : SkyeColors.whiteF6,
             fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
           ),
         ),
@@ -196,24 +197,25 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
         final isNow = time.hour == now.hour && time.day == now.day;
 
         return Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: const Color(0xFF232125),
+            color: SkyeColors.cardColor,
             borderRadius: BorderRadius.circular(18),
             border: isNow
-                ? Border.all(color: const Color(0xFFFFFFFF), width: 2)
+                ? Border.all(color: SkyeColors.whitePure, width: 2)
                 : null,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: SkyeColors.shadowMedium,
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
             ],
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Time and day
               Row(
@@ -224,19 +226,19 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                     children: [
                       Text(
                         isNow ? 'Now' : DateFormat('HH:mm').format(time),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFFFAFAFA),
+                          color: SkyeColors.textPrimary,
                         ),
                       ),
                       if (!isNow)
                         Text(
                           DateFormat('EEE').format(time),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFFF6F6F6),
+                            color: SkyeColors.textSecondary,
                           ),
                         ),
                     ],
@@ -245,12 +247,12 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1C1A1F),
+                      color: SkyeColors.behindContainer,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Icon(
                       _getHourlyIcon(hourly.condition, hourly.icon),
-                      color: const Color(0xFFFFFFFF),
+                      color: SkyeColors.whitePure,
                       size: 24,
                     ),
                   ),
@@ -265,27 +267,27 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                   // Temperature
                   Text(
                     '${hourly.temperature.round()}°',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFFFAFAFA),
+                      color: SkyeColors.textPrimary,
                     ),
                   ),
                   // Precipitation
                   Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.water_drop,
                         size: 14,
-                        color: Color(0xFFFFFFFF),
+                        color: SkyeColors.whitePure,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         '${(hourly.pop * 100).round()}%',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFFF6F6F6),
+                          color: SkyeColors.textSecondary,
                         ),
                       ),
                     ],
@@ -315,10 +317,10 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           decoration: BoxDecoration(
-            color: const Color(0xFF232125),
+            color: SkyeColors.cardColor,
             borderRadius: BorderRadius.circular(20),
             border: isToday
-                ? Border.all(color: const Color(0xFFFFFFFF), width: 2)
+                ? Border.all(color: SkyeColors.whitePure, width: 2)
                 : null,
             boxShadow: [
               BoxShadow(
@@ -339,12 +341,12 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                     Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1C1A1F),
+                        color: SkyeColors.behindContainer,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Icon(
                         _getHourlyIcon(daily.condition, daily.icon),
-                        color: const Color(0xFFFFFFFF),
+                        color: SkyeColors.whitePure,
                         size: 36,
                       ),
                     ),
@@ -360,7 +362,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFFFAFAFA),
+                              color: SkyeColors.whiteFA,
                             ),
                           ),
                           if (daily.pop > 0)
@@ -369,7 +371,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                                 const Icon(
                                   Icons.water_drop,
                                   size: 14,
-                                  color: Color(0xFFFFFFFF),
+                                  color: SkyeColors.whitePure,
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
@@ -377,7 +379,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                                   style: const TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
-                                    color: Color(0xFFF6F6F6),
+                                    color: SkyeColors.whiteF6,
                                   ),
                                 ),
                               ],
@@ -393,7 +395,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1C1A1F),
+                  color: SkyeColors.behindContainer,
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Row(
@@ -423,7 +425,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                     Container(
                       width: 1,
                       height: 36,
-                      color: const Color(0xFF232125),
+                      color: SkyeColors.cardColor,
                     ),
                     const SizedBox(width: 16),
                     // Max temp with up arrow
@@ -494,7 +496,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFFFAFAFA),
+                color: SkyeColors.whiteFA,
               ),
               textAlign: TextAlign.center,
             ),
@@ -503,7 +505,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
               error,
               style: const TextStyle(
                 fontSize: 14,
-                color: Color(0xFFF6F6F6),
+                color: SkyeColors.whiteF6,
               ),
               textAlign: TextAlign.center,
             ),
@@ -519,9 +521,10 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
         'No forecast data available',
         style: TextStyle(
           fontSize: 16,
-          color: Color(0xFFF6F6F6),
+          color: SkyeColors.whiteF6,
         ),
       ),
     );
   }
 }
+

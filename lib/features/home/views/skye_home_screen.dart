@@ -562,7 +562,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFFFAFAFA),
+                      color: SkyeColors.whiteFA,
                     ),
                   ),
                 ),
@@ -592,7 +592,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFFFAFAFA),
+                color: SkyeColors.whiteFA,
               ),
             ),
           ),
@@ -601,7 +601,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
           Icon(
             _getHourlyIcon(day.condition, day.icon),
             size: 28,
-            color: const Color(0xFFFFFFFF),
+            color: SkyeColors.whitePure,
           ),
 
           const Spacer(),
@@ -619,7 +619,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
-                color: Color(0xFFF6F6F6),
+                color: SkyeColors.whiteF6,
               ),
             ),
             const SizedBox(width: 16),
@@ -704,7 +704,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xFFFAFAFA),
+                    color: SkyeColors.whiteFA,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -714,7 +714,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                   style: const TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w500,
-                    color: Color(0xFFF6F6F6),
+                    color: SkyeColors.whiteF6,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -788,9 +788,9 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
         clipBehavior: Clip.none,
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(1),
             decoration: BoxDecoration(
-              color: const Color(0xFF232125),
+              color: SkyeColors.cardColor,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
@@ -801,8 +801,8 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
               ],
             ),
             child: Icon(
-              Icons.warning_rounded,
-              color: hasAlerts ? const Color(0xFFEF4444) : const Color(0xFFFFFFFF),
+              Icons.crisis_alert_rounded,
+              color: hasAlerts ? const Color(0xFFEF4444) : SkyeColors.whitePure,
               size: 22,
             ),
           ),
@@ -861,7 +861,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFFFAFAFA),
+                color: SkyeColors.whiteFA,
               ),
               textAlign: TextAlign.center,
             ),
@@ -870,7 +870,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
               error,
               style: const TextStyle(
                 fontSize: 14,
-                color: Color(0xFFF6F6F6),
+                color: SkyeColors.whiteF6,
               ),
               textAlign: TextAlign.center,
             ),
@@ -882,8 +882,8 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
               icon: const Icon(Icons.refresh_rounded),
               label: const Text('Try Again'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF232125),
-                foregroundColor: const Color(0xFFFAFAFA),
+                backgroundColor: SkyeColors.cardColor,
+                foregroundColor: SkyeColors.whiteFA,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 24,
                   vertical: 12,
@@ -906,9 +906,10 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
         'No weather data available',
         style: TextStyle(
           fontSize: 16,
-          color: Color(0xFFF6F6F6),
+          color: SkyeColors.whiteF6,
         ),
       ),
     );
   }
 }
+

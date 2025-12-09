@@ -204,3 +204,4 @@ class UserAlertsScreen extends ConsumerWidget {
     );
   }
 }
+

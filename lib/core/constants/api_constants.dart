@@ -16,3 +16,4 @@ class ApiConstants {
   static const Duration weatherCacheDuration = Duration(minutes: 10);
   static const Duration forecastCacheDuration = Duration(hours: 1);
 }
+

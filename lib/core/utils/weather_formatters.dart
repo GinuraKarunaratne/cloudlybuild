@@ -24,3 +24,4 @@ extension TimeFormatter on DateTime {
     return settings.formatTime(this);
   }
 }
+

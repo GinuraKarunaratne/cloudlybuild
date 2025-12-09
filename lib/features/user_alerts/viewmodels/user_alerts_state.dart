@@ -27,3 +27,4 @@ class UserAlertsState {
   int get enabledAlertsCount => alerts.where((a) => a.isEnabled).length;
   List<UserAlertModel> get enabledAlerts => alerts.where((a) => a.isEnabled).toList();
 }
+

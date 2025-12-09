@@ -41,3 +41,4 @@ class WeatherAlertsRepository {
     return uniqueAlerts.values.toList();
   }
 }
+

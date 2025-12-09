@@ -99,3 +99,4 @@ class AlertsNotifier extends StateNotifier<AlertsState> {
 final alertsProvider = StateNotifierProvider<AlertsNotifier, AlertsState>((ref) {
   return AlertsNotifier(ref);
 });
+

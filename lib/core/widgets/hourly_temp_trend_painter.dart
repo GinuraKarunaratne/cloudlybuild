@@ -127,3 +127,4 @@ class HourlyTempTrendPainter extends CustomPainter {
         oldDelegate.dotColor != dotColor;
   }
 }
+

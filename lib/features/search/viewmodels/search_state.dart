@@ -109,3 +109,4 @@ class SearchState {
     return oceania.contains(country);
   }
 }
+

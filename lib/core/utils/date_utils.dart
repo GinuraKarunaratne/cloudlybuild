@@ -27,3 +27,4 @@ class AppDateUtils {
     return formatTime(dateTime, use24Hour: use24Hour);
   }
 }
+

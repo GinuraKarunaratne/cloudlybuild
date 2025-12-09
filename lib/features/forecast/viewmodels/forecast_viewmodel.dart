@@ -54,3 +54,4 @@ class ForecastNotifier extends StateNotifier<ForecastState> {
 final forecastProvider = StateNotifierProvider<ForecastNotifier, ForecastState>((ref) {
   return ForecastNotifier(ref);
 });
+
