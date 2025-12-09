@@ -8,6 +8,10 @@ import '../../alerts/views/skye_alerts_screen.dart';
 import '../../search/views/search_screen.dart';
 import '../widgets/weather_quality_section.dart';
 import '../../alerts/viewmodels/alerts_viewmodel.dart';
+import '../../activities/views/activities_list_screen.dart';
+import '../../activities/providers/activities_provider.dart';
+import '../../activities/utils/activity_status_evaluator.dart';
+import '../../activities/models/activity_model.dart';
 import '../../../core/utils/skye_weather_utils.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../data/models/weather_model.dart';
@@ -67,6 +71,19 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const SearchScreen()),
+    );
+  }
+
+  void _openActivities() {
+    final homeState = ref.read(homeProvider);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ActivitiesListScreen(
+          weather: homeState.weather,
+          uvData: homeState.uvData,
+        ),
+      ),
     );
   }
 
@@ -132,6 +149,11 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                                       uvData: homeState.uvData,
                                     ),
 
+                                  const SizedBox(height: 16),
+
+                                  // Activities Preview Card
+                                  _buildActivitiesPreviewCard(homeState),
+
                                   const SizedBox(height: 80),
                                 ],
                               ),
@@ -153,9 +175,14 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                       icon: Icons.search,
                       onTap: _openSearch,
                     ),
-                    // Right side - Alerts and Settings
+                    // Right side - Activities, Alerts and Settings
                     Row(
                       children: [
+                        _buildActionButton(
+                          icon: Icons.calendar_today,
+                          onTap: _openActivities,
+                        ),
+                        const SizedBox(width: 12),
                         _buildAlertActionButton(),
                         const SizedBox(width: 12),
                         _buildActionButton(
@@ -921,6 +948,136 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
           color: SkyeColors.whiteF6,
         ),
       ),
+    );
+  }
+
+  /// Activities Preview Card
+  Widget _buildActivitiesPreviewCard(HomeState homeState) {
+    return Consumer(
+      builder: (context, ref, child) {
+        final activities = ref.watch(activitiesProvider);
+        
+        if (activities.isEmpty) {
+          return Container(
+            decoration: BoxDecoration(
+              color: SkyeColors.surfaceMid,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: SkyeColors.glassBorder),
+              boxShadow: [
+                BoxShadow(
+                  color: SkyeColors.black.withAlphaFromOpacity(0.3),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('My Activities', style: SkyeTypography.subtitle),
+                    const SizedBox(height: 4),
+                    Text('No activities yet', style: SkyeTypography.caption.copyWith(color: SkyeColors.textMuted)),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: _openActivities,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: SkyeColors.behindContainer,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text('Add', style: SkyeTypography.label.copyWith(color: SkyeColors.textPrimary)),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        // Show perfect/caution/notRecommended counts
+        int perfect = 0, caution = 0, notRecommended = 0;
+        
+        for (var activity in activities) {
+          final status = ActivityStatusEvaluator.evaluateStatus(
+            activity,
+            currentTemp: homeState.weather?.feelsLike ?? 0,
+            currentWind: homeState.weather?.windSpeed ?? 0,
+            currentVisibility: (homeState.weather?.visibility ?? 0) / 1000.0,
+            currentUV: homeState.uvData?.uvIndex ?? 0,
+          );
+          
+          switch (status) {
+            case ActivityStatus.perfect:
+              perfect++;
+              break;
+            case ActivityStatus.caution:
+              caution++;
+              break;
+            case ActivityStatus.notRecommended:
+              notRecommended++;
+              break;
+          }
+        }
+
+        return Container(
+          decoration: BoxDecoration(
+            color: SkyeColors.surfaceMid,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: SkyeColors.glassBorder),
+            boxShadow: [
+              BoxShadow(
+                color: SkyeColors.black.withAlphaFromOpacity(0.3),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('My Activities', style: SkyeTypography.subtitle),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      if (perfect > 0) ...[
+                        Text('🟢 $perfect', style: SkyeTypography.caption.copyWith(color: SkyeColors.textSecondary)),
+                        const SizedBox(width: 12),
+                      ],
+                      if (caution > 0) ...[
+                        Text('🟡 $caution', style: SkyeTypography.caption.copyWith(color: SkyeColors.textSecondary)),
+                        const SizedBox(width: 12),
+                      ],
+                      if (notRecommended > 0) ...[
+                        Text('🔴 $notRecommended', style: SkyeTypography.caption.copyWith(color: SkyeColors.textSecondary)),
+                      ],
+                    ],
+                  ),
+                ],
+              ),
+              GestureDetector(
+                onTap: _openActivities,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: SkyeColors.behindContainer,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text('View All', style: SkyeTypography.label.copyWith(color: SkyeColors.textPrimary)),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
