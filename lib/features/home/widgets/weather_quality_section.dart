@@ -3,22 +3,101 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import '../../../core/theme/skye_theme.dart';
+import '../../../data/models/weather_model.dart';
+import '../../../data/models/forecast_model.dart';
+import '../../../data/models/uv_data_model.dart';
 
 class WeatherQualitySection extends StatelessWidget {
-  final int weatherQualityScore; // 0 - 100
-  final String qualityLabel;
-  final String qualityDescription;
+  final WeatherModel? weather;
+  final ForecastModel? forecast;
+  final UVDataModel? uvData;
 
   const WeatherQualitySection({
     Key? key,
-    required this.weatherQualityScore,
-    required this.qualityLabel,
-    required this.qualityDescription,
+    this.weather,
+    this.forecast,
+    this.uvData,
   }) : super(key: key);
+
+  // Compute a score (0-100) based on several factors:
+  // - Temperature comfort (ideal between 18-25 C)
+  // - Humidity (ideal 30-60%)
+  // - Wind (lower is better)
+  // - Precipitation probability (lower is better)
+  // - UV index (lower is better for outdoor comfort/safety)
+  int _computeScore() {
+    if (weather == null) return 0;
+
+    double score = 0.0;
+
+    // Temperature comfort: optimal at 21°C, falloff +/-10°C
+    final temp = weather!.feelsLike;
+    final tempDiff = (temp - 21.0).abs();
+    final tempScore = (1.0 - (tempDiff / 10.0)).clamp(0.0, 1.0) * 30.0;
+    score += tempScore;
+
+    // Humidity: optimal 30-60
+    final humidity = weather!.humidity.toDouble();
+    double humidityScore;
+    if (humidity < 30) {
+      humidityScore = (humidity / 30.0) * 10.0; // lower is worse below 30
+    } else if (humidity <= 60) {
+      humidityScore = 10.0; // perfect
+    } else {
+      humidityScore = (1.0 - ((humidity - 60.0) / 40.0)).clamp(0.0, 1.0) * 10.0;
+    }
+    score += humidityScore;
+
+    // Wind: ideal < 5 m/s
+    final wind = weather!.windSpeed;
+    final windScore = (1.0 - (wind / 15.0)).clamp(0.0, 1.0) * 15.0;
+    score += windScore;
+
+    // Precipitation: use today's pop if present, else use forecast average
+    double pop = 0.0;
+    if (forecast != null && forecast!.dailyForecasts.isNotEmpty) {
+      pop = forecast!.dailyForecasts.first.pop; // today's pop
+    }
+    final popScore = (1.0 - pop).clamp(0.0, 1.0) * 20.0;
+    score += popScore;
+
+    // UV safety: penalize high UV (if available)
+    double uvPenalty = 0.0;
+    if (uvData != null) {
+      final u = uvData!.uvIndex;
+      uvPenalty = (1.0 - (u / 11.0)).clamp(0.0, 1.0) * 25.0;
+    } else {
+      // If no UV data, give a neutral mid contribution
+      uvPenalty = 12.5;
+    }
+    score += uvPenalty;
+
+    // Normalize scale: max possible is about 30+10+15+20+25 = 100
+    final int finalScore = score.round().clamp(0, 100);
+    return finalScore;
+  }
+
+  String _labelForScore(int score) {
+    if (score >= 85) return 'Excellent';
+    if (score >= 70) return 'Great';
+    if (score >= 50) return 'Good';
+    if (score >= 30) return 'Fair';
+    return 'Poor';
+  }
+
+  String _descriptionForScore(int score) {
+    if (score >= 85) return 'Ideal conditions for outdoor activities.';
+    if (score >= 70) return 'Comfortable conditions with minor caveats.';
+    if (score >= 50) return 'Acceptable but check specific metrics (wind/UV).';
+    if (score >= 30) return 'Conditions may be uncomfortable; consider indoors.';
+    return 'Poor weather quality — avoid extended outdoor exposure.';
+  }
 
   @override
   Widget build(BuildContext context) {
-    final score = weatherQualityScore.clamp(0, 100);
+    final score = _computeScore();
+    final label = _labelForScore(score);
+    final description = _descriptionForScore(score);
 
     return Container(
       width: double.infinity,
@@ -58,19 +137,63 @@ class WeatherQualitySection extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(qualityLabel, style: SkyeTypography.title.copyWith(color: SkyeColors.textPrimary)),
+                    Text(label, style: SkyeTypography.title.copyWith(color: SkyeColors.textPrimary)),
                     const SizedBox(height: 8),
                     Text(
-                      qualityDescription,
+                      description,
                       style: SkyeTypography.body.copyWith(color: SkyeColors.textSecondary),
-                      maxLines: 2,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
+                    const SizedBox(height: 12),
+
+                    // Small metrics summary displayed horizontally; allow horizontal scroll on overflow
+                    if (weather != null) ...[
+                      const SizedBox(height: 8),
+                      SizedBox(
+                        height: 40,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
+                          child: Row(
+                            children: [
+                              _metricChip('Temp', '${weather!.temperature.round()}°'),
+                              const SizedBox(width: 12),
+                              _metricChip('Humidity', '${weather!.humidity}%'),
+                              const SizedBox(width: 12),
+                              _metricChip('Wind', '${weather!.windSpeed.toStringAsFixed(1)} m/s'),
+                              if (uvData != null) ...[
+                                const SizedBox(width: 12),
+                                _metricChip('UV', uvData!.uvIndex.toStringAsFixed(1)),
+                              ],
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _metricChip(String label, String value) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: SkyeColors.behindContainer,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(label, style: SkyeTypography.label.copyWith(color: SkyeColors.textTertiary)),
+          const SizedBox(width: 8),
+          Text(value, style: SkyeTypography.subtitle.copyWith(color: SkyeColors.textPrimary)),
         ],
       ),
     );

@@ -122,6 +122,16 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                                       homeState.forecast!.dailyForecasts.isNotEmpty)
                                     _buildDailyForecastCard(homeState.forecast!),
 
+                                  // Weather Quality card placed below the forecast card
+                                  if (homeState.forecast != null)
+                                    const SizedBox(height: 12),
+                                  if (homeState.forecast != null)
+                                    WeatherQualitySection(
+                                      weather: homeState.weather,
+                                      forecast: homeState.forecast,
+                                      uvData: homeState.uvData,
+                                    ),
+
                                   const SizedBox(height: 80),
                                 ],
                               ),
@@ -134,7 +144,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
       floatingActionButton: homeState.weather != null
           ? SafeArea(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+                padding: const EdgeInsets.fromLTRB(5, 16, 20, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -575,11 +585,6 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
           // List of daily forecasts
           ...days.map((day) => _buildDailyItem(day)),
           const SizedBox(height: 24),
-          WeatherQualitySection(
-            weatherQualityScore: 82,
-            qualityLabel: 'Great',
-            qualityDescription: 'Comfortable temperature with low humidity.',
-          ),
         ],
       ),
     );
