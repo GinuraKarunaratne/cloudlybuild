@@ -6,6 +6,7 @@ import '../../forecast/views/skye_forecast_screen.dart';
 import '../../settings/views/skye_settings_screen.dart';
 import '../../alerts/views/skye_alerts_screen.dart';
 import '../../search/views/search_screen.dart';
+import '../widgets/weather_quality_section.dart';
 import '../../alerts/viewmodels/alerts_viewmodel.dart';
 import '../../../core/utils/skye_weather_utils.dart';
 import '../../../core/utils/date_utils.dart';
@@ -290,7 +291,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: SkyeColors.whitePure.withOpacity(0.15),
+                        color: SkyeColors.whitePure.withAlphaFromOpacity(0.15),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -322,7 +323,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-              color: SkyeColors.black.withOpacity(0.3),
+              color: SkyeColors.black.withAlphaFromOpacity(0.3),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -428,7 +429,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: SkyeColors.black.withOpacity(0.3),
+            color: SkyeColors.black.withAlphaFromOpacity(0.3),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -525,7 +526,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: SkyeColors.black.withOpacity(0.3),
+            color: SkyeColors.black.withAlphaFromOpacity(0.3),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -573,6 +574,12 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
 
           // List of daily forecasts
           ...days.map((day) => _buildDailyItem(day)),
+          const SizedBox(height: 24),
+          WeatherQualitySection(
+            weatherQualityScore: 82,
+            qualityLabel: 'Great',
+            qualityDescription: 'Comfortable temperature with low humidity.',
+          ),
         ],
       ),
     );
@@ -648,7 +655,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withAlphaFromOpacity(0.3),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -761,7 +768,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withAlphaFromOpacity(0.3),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -794,7 +801,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withAlphaFromOpacity(0.3),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),

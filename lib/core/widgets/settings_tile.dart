@@ -32,7 +32,7 @@ class SettingsTile extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: (iconColor ?? SkyeColors.skyBlue).withOpacity(0.15),
+              color: (iconColor ?? SkyeColors.skyBlue).withAlphaFromOpacity(0.15),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(

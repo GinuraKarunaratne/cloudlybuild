@@ -118,7 +118,7 @@ class _HourlyForecastGrid extends StatelessWidget {
                   child: Text(
                     _formatTime(h.dt),
                     style: SkyeTypography.caption.copyWith(
-                      color: SkyeColors.textSecondary.withOpacity(0.8),
+                      color: SkyeColors.textSecondary.withAlphaFromOpacity(0.8),
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.3,
@@ -145,7 +145,7 @@ class _HourlyForecastGrid extends StatelessWidget {
                     Icon(
                       _mapConditionToIcon(h.condition, h.icon),
                       size: 24,
-                      color: SkyeColors.textPrimary.withOpacity(0.9),
+                      color: SkyeColors.textPrimary.withAlphaFromOpacity(0.9),
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -172,7 +172,7 @@ class _HourlyForecastGrid extends StatelessWidget {
           child: CustomPaint(
             painter: HourlyTempTrendPainter(
               temperatures: temps,
-              lineColor: SkyeColors.skyBlue.withOpacity(0.8),
+              lineColor: SkyeColors.skyBlue.withAlphaFromOpacity(0.8),
               dotColor: Colors.white,
               gradientStartColor: SkyeColors.skyBlue,
               gradientEndColor: SkyeColors.twilightPurple,
@@ -195,13 +195,13 @@ class _HourlyForecastGrid extends StatelessWidget {
                     Icon(
                       Icons.water_drop,
                       size: 12,
-                      color: SkyeColors.skyBlue.withOpacity(0.7),
+                      color: SkyeColors.skyBlue.withAlphaFromOpacity(0.7),
                     ),
                     const SizedBox(width: 3),
                     Text(
                       '${(h.pop * 100).round()}%',
                       style: SkyeTypography.caption.copyWith(
-                        color: SkyeColors.textSecondary.withOpacity(0.75),
+                        color: SkyeColors.textSecondary.withAlphaFromOpacity(0.75),
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.3,

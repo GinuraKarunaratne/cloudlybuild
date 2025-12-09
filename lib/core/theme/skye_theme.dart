@@ -14,10 +14,10 @@ class SkyeColors {
   // All accent colors replaced with grayscale hierarchy
 
   // Text hierarchy - white with opacity only
-  static Color textPrimary = Colors.white.withOpacity(0.96);
-  static Color textSecondary = Colors.white.withOpacity(0.84);
-  static Color textTertiary = Colors.white.withOpacity(0.64);
-  static Color textMuted = Colors.white.withOpacity(0.45);
+  static Color textPrimary = Colors.white.withAlphaFromOpacity(0.96);
+  static Color textSecondary = Colors.white.withAlphaFromOpacity(0.84);
+  static Color textTertiary = Colors.white.withAlphaFromOpacity(0.64);
+  static Color textMuted = Colors.white.withAlphaFromOpacity(0.45);
 
   // Common utility colors (monotone only)
   static const Color whitePure = Color(0xFFFFFFFF);
@@ -34,17 +34,17 @@ class SkyeColors {
   static const Color transparent = Colors.transparent;
 
   // Glass effect hierarchy (all white opacity)
-  static Color glassLight = Colors.white.withOpacity(0.10);
-  static Color glassMedium = Colors.white.withOpacity(0.15);
-  static Color glassHeavy = Colors.white.withOpacity(0.20);
-  static Color glassBorder = Colors.white.withOpacity(0.12);
-  static Color glassHighlight = Colors.white.withOpacity(0.05);
+  static Color glassLight = Colors.white.withAlphaFromOpacity(0.10);
+  static Color glassMedium = Colors.white.withAlphaFromOpacity(0.15);
+  static Color glassHeavy = Colors.white.withAlphaFromOpacity(0.20);
+  static Color glassBorder = Colors.white.withAlphaFromOpacity(0.12);
+  static Color glassHighlight = Colors.white.withAlphaFromOpacity(0.05);
 
   // Shadows (pure black opacity)
-  static Color shadowSoft = Colors.black.withOpacity(0.1);
-  static Color shadowMedium = Colors.black.withOpacity(0.2);
-  static Color shadowHard = Colors.black.withOpacity(0.3);
-  static Color overlay = Colors.black.withOpacity(0.4);
+  static Color shadowSoft = Colors.black.withAlphaFromOpacity(0.1);
+  static Color shadowMedium = Colors.black.withAlphaFromOpacity(0.2);
+  static Color shadowHard = Colors.black.withAlphaFromOpacity(0.3);
+  static Color overlay = Colors.black.withAlphaFromOpacity(0.4);
 
   // Pure monotone gradients (NO color tint)
   static LinearGradient sunnyGradient = const LinearGradient(
@@ -239,6 +239,19 @@ class SkyeTypography {
     height: 1.2,
     letterSpacing: -0.5,
   );
+
+}
+
+// Utility extension providing a safe alternative to `withOpacity`.
+// We use a distinct name to avoid colliding with existing `withValues` APIs.
+extension ColorAlphaFromOpacity on Color {
+  Color withAlphaFromOpacity(double opacity) {
+    final int alpha = (opacity * 255).round().clamp(0, 255).toInt();
+    final int rr = ((this.r * 255.0).round()).clamp(0, 255).toInt();
+    final int gg = ((this.g * 255.0).round()).clamp(0, 255).toInt();
+    final int bb = ((this.b * 255.0).round()).clamp(0, 255).toInt();
+    return Color.fromARGB(alpha, rr, gg, bb);
+  }
 }
 
 /// Skye Design System - Pure Monotone Theme Configuration

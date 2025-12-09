@@ -142,7 +142,7 @@ class UserAlertCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: (color ?? SkyeColors.textSecondary).withOpacity(0.1),
+        color: (color ?? SkyeColors.textSecondary).withAlphaFromOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(

@@ -49,7 +49,7 @@ class UserAlertsScreen extends ConsumerWidget {
               color: SkyeColors.surfaceDark,
               border: Border(
                 top: BorderSide(
-                  color: SkyeColors.whitePure.withOpacity(0.1),
+                  color: SkyeColors.whitePure.withAlphaFromOpacity(0.1),
                   width: 1,
                 ),
               ),
@@ -95,7 +95,7 @@ class UserAlertsScreen extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(32),
               decoration: BoxDecoration(
-                color: SkyeColors.skyBlue.withOpacity(0.1),
+                color: SkyeColors.skyBlue.withAlphaFromOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(

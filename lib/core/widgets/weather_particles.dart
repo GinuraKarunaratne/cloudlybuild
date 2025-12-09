@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/skye_theme.dart';
 import 'package:newton_particles/newton_particles.dart';
 import '../../data/models/weather_model.dart';
 
@@ -36,7 +37,7 @@ class WeatherParticles extends StatelessWidget {
             shape: CircleShape(),
             size: Size(heavy ? 4 : 3, heavy ? 25 : 20),
             color: SingleParticleColor(
-              color: Colors.white.withOpacity(heavy ? 0.7 : 0.6),
+              color: Colors.white.withAlphaFromOpacity(heavy ? 0.7 : 0.6),
             ),
           ),
           effectConfiguration: EffectConfiguration(
@@ -55,7 +56,7 @@ class WeatherParticles extends StatelessWidget {
             shape: CircleShape(),
             size: const Size(6, 6),
             color: SingleParticleColor(
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withAlphaFromOpacity(0.8),
             ),
           ),
           effectConfiguration: const EffectConfiguration(
@@ -75,7 +76,7 @@ class WeatherParticles extends StatelessWidget {
             shape: CircleShape(),
             size: const Size(2, 2),
             color: SingleParticleColor(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withAlphaFromOpacity(0.1),
             ),
           ),
           effectConfiguration: const EffectConfiguration(

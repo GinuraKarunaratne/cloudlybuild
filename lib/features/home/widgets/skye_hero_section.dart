@@ -52,7 +52,7 @@ class SkyeHeroSection extends ConsumerWidget {
                           children: [
                             Icon(
                               Icons.location_on_rounded,
-                              color: SkyeColors.textPrimary.withOpacity(0.9),
+                              color: SkyeColors.textPrimary.withAlphaFromOpacity(0.9),
                               size: 20,
                             ),
                             const SizedBox(width: 6),
@@ -66,7 +66,7 @@ class SkyeHeroSection extends ConsumerWidget {
                         Text(
                           AppDateUtils.formatDayMonth(DateTime.now()),
                           style: SkyeTypography.body.copyWith(
-                            color: SkyeColors.textSecondary.withOpacity(0.8),
+                            color: SkyeColors.textSecondary.withAlphaFromOpacity(0.8),
                           ),
                         ),
                       ],
@@ -153,7 +153,7 @@ class SkyeHeroSection extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.15),
+        color: Colors.white.withAlphaFromOpacity(0.15),
         borderRadius: BorderRadius.circular(24),
       ),
       child: Row(
@@ -187,7 +187,7 @@ class SkyeHeroSection extends ConsumerWidget {
           vertical: 14,
         ),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.15),
+          color: Colors.white.withAlphaFromOpacity(0.15),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -226,7 +226,7 @@ class SkyeHeroSection extends ConsumerWidget {
         Text(
           label,
           style: SkyeTypography.caption.copyWith(
-            color: SkyeColors.textSecondary.withOpacity(0.85),
+            color: SkyeColors.textSecondary.withAlphaFromOpacity(0.85),
             letterSpacing: 0.8,
           ),
         ),
@@ -238,7 +238,7 @@ class SkyeHeroSection extends ConsumerWidget {
     return Container(
       width: 1,
       height: 32,
-      color: Colors.white.withOpacity(0.25),
+      color: Colors.white.withAlphaFromOpacity(0.25),
     );
   }
 

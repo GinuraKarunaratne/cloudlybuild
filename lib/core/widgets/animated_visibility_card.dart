@@ -180,9 +180,9 @@ class _FogMistPainter extends CustomPainter {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          color.withOpacity(opacity * 0.3),
-          color.withOpacity(opacity),
-          color.withOpacity(opacity * 0.5),
+          color.withAlphaFromOpacity(opacity * 0.3),
+          color.withAlphaFromOpacity(opacity),
+          color.withAlphaFromOpacity(opacity * 0.5),
         ],
         stops: const [0.0, 0.5, 1.0],
       ).createShader(Rect.fromLTWH(0, yPosition - layerHeight / 2, size.width, layerHeight))
@@ -223,7 +223,7 @@ class _FogMistPainter extends CustomPainter {
       silhouettePath.close();
 
       final silhouettePaint = Paint()
-        ..color = color.withOpacity(opacity)
+        ..color = color.withAlphaFromOpacity(opacity)
         ..style = PaintingStyle.fill;
 
       canvas.drawPath(silhouettePath, silhouettePaint);
@@ -236,7 +236,7 @@ class _FogMistPainter extends CustomPainter {
       final lineOpacity = 0.1 * normalizedVisibility * (1.0 - i / numLines * 0.5);
 
       final linePaint = Paint()
-        ..color = color.withOpacity(lineOpacity)
+        ..color = color.withAlphaFromOpacity(lineOpacity)
         ..strokeWidth = 1.5
         ..strokeCap = StrokeCap.round;
 

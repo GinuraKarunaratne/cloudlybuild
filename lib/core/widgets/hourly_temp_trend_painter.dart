@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import '../theme/skye_theme.dart';
 
 /// Custom painter for hourly temperature trend line with dots
 class HourlyTempTrendPainter extends CustomPainter {
@@ -74,8 +75,8 @@ class HourlyTempTrendPainter extends CustomPainter {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          gradientStartColor.withOpacity(0.25),
-          gradientEndColor.withOpacity(0.05),
+          gradientStartColor.withAlphaFromOpacity(0.25),
+          gradientEndColor.withAlphaFromOpacity(0.05),
         ],
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
       ..style = PaintingStyle.fill;
@@ -108,7 +109,7 @@ class HourlyTempTrendPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final dotOutlinePaint = Paint()
-      ..color = lineColor.withOpacity(0.3)
+      ..color = lineColor.withAlphaFromOpacity(0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
 

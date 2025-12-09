@@ -153,7 +153,7 @@ class SkyeMetricsSection extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.15),
+              color: color.withAlphaFromOpacity(0.15),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(

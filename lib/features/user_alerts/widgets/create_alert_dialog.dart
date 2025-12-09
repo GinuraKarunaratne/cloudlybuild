@@ -84,9 +84,9 @@ class _CreateAlertDialogState extends ConsumerState<CreateAlertDialog> {
                 style: TextStyle(color: SkyeColors.textPrimary),
                 decoration: InputDecoration(
                   hintText: 'e.g., Cold Weather Alert',
-                  hintStyle: TextStyle(color: SkyeColors.textSecondary.withOpacity(0.5)),
+                  hintStyle: TextStyle(color: SkyeColors.textSecondary.withAlphaFromOpacity(0.5)),
                   filled: true,
-                  fillColor: Colors.white.withOpacity(0.05),
+                  fillColor: Colors.white.withAlphaFromOpacity(0.05),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -147,9 +147,9 @@ class _CreateAlertDialogState extends ConsumerState<CreateAlertDialog> {
                           style: TextStyle(color: SkyeColors.textPrimary),
                           decoration: InputDecoration(
                             hintText: '22.0',
-                            hintStyle: TextStyle(color: SkyeColors.textSecondary.withOpacity(0.5)),
+                            hintStyle: TextStyle(color: SkyeColors.textSecondary.withAlphaFromOpacity(0.5)),
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.05),
+                            fillColor: Colors.white.withAlphaFromOpacity(0.05),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: BorderSide.none,
@@ -220,7 +220,7 @@ class _CreateAlertDialogState extends ConsumerState<CreateAlertDialog> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withAlphaFromOpacity(0.05),
         borderRadius: BorderRadius.circular(16),
       ),
       child: DropdownButton<AlertConditionType>(
@@ -248,7 +248,7 @@ class _CreateAlertDialogState extends ConsumerState<CreateAlertDialog> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withAlphaFromOpacity(0.05),
         borderRadius: BorderRadius.circular(16),
       ),
       child: DropdownButton<AlertOperator>(

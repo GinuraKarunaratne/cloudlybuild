@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../../data/models/weather_model.dart';
+import '../theme/skye_theme.dart';
 
 /// Weather animation widget with Lottie support
 class WeatherAnimation extends StatelessWidget {
@@ -158,10 +159,10 @@ class _AnimatedWeatherIconState extends State<_AnimatedWeatherIcon>
             child: Icon(
               widget.icon,
               size: widget.size,
-              color: Colors.white.withOpacity(0.95),
+              color: Colors.white.withAlphaFromOpacity(0.95),
               shadows: [
                 Shadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withAlphaFromOpacity(0.2),
                   offset: const Offset(0, 8),
                   blurRadius: 24,
                 ),

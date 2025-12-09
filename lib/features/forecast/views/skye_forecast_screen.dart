@@ -105,7 +105,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
+                    color: Colors.black.withAlphaFromOpacity(0.3),
                     blurRadius: 10,
                     offset: const Offset(0, 3),
                   ),
@@ -324,7 +324,7 @@ class _SkyeForecastScreenState extends ConsumerState<SkyeForecastScreen> {
                 : null,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withAlphaFromOpacity(0.3),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),

@@ -55,7 +55,7 @@ class _AnimatedWindCardState extends State<AnimatedWindCard>
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.15),
+                  color: color.withAlphaFromOpacity(0.15),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Icon(
@@ -137,10 +137,10 @@ class _FlowingWindPainter extends CustomPainter {
       final paint = Paint()
         ..shader = LinearGradient(
           colors: [
-            color.withOpacity(0.0),
-            color.withOpacity(opacity),
-            color.withOpacity(opacity * 0.5),
-            color.withOpacity(0.0),
+            color.withAlphaFromOpacity(0.0),
+            color.withAlphaFromOpacity(opacity),
+            color.withAlphaFromOpacity(opacity * 0.5),
+            color.withAlphaFromOpacity(0.0),
           ],
           stops: const [0.0, 0.3, 0.7, 1.0],
         ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
@@ -190,7 +190,7 @@ class _FlowingWindPainter extends CustomPainter {
     double intensity,
   ) {
     final arrowPaint = Paint()
-      ..color = color.withOpacity(0.4 + intensity * 0.3)
+      ..color = color.withAlphaFromOpacity(0.4 + intensity * 0.3)
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;

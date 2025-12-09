@@ -47,7 +47,7 @@ class UVIndexCard extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: UVUtils.getSafetyLevelColor(safetyLevel).withOpacity(0.2),
+                    color: UVUtils.getSafetyLevelColor(safetyLevel).withAlphaFromOpacity(0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -88,7 +88,7 @@ class UVIndexCard extends StatelessWidget {
                       Text(
                         'UV',
                         style: SkyeTypography.caption.copyWith(
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white.withAlphaFromOpacity(0.9),
                           fontSize: 9,
                           fontWeight: FontWeight.w600,
                         ),

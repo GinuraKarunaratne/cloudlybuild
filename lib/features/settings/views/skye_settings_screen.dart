@@ -33,7 +33,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
+                              color: Colors.black.withAlphaFromOpacity(0.3),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
@@ -172,7 +172,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withAlphaFromOpacity(0.3),
               blurRadius: 15,
               offset: const Offset(0, 5),
             ),
@@ -234,7 +234,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withAlphaFromOpacity(0.3),
               blurRadius: 15,
               offset: const Offset(0, 5),
             ),
@@ -306,7 +306,7 @@ class SkyeSettingsScreen extends ConsumerWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withAlphaFromOpacity(0.3),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),

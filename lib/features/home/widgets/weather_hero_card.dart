@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/skye_theme.dart';
 
 /// WeatherHeroCard - Modern hero section widget
 /// Reusable card component following the specified design
@@ -37,7 +38,7 @@ class WeatherHeroCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.4),
+            color: Colors.black.withAlphaFromOpacity(0.4),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -240,7 +241,7 @@ class MetricPillCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withAlphaFromOpacity(0.2),
               shape: BoxShape.circle,
             ),
             child: Icon(

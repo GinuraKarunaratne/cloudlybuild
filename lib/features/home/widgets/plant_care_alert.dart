@@ -47,7 +47,7 @@ class PlantCareAlert extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: alertData['severityColor'].withOpacity(0.2),
+                    color: alertData['severityColor'].withAlphaFromOpacity(0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -71,7 +71,7 @@ class PlantCareAlert extends StatelessWidget {
                   width: 56,
                   height: 56,
                   decoration: BoxDecoration(
-                    color: alertData['severityColor'].withOpacity(0.15),
+                    color: alertData['severityColor'].withAlphaFromOpacity(0.15),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Icon(

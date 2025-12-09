@@ -75,7 +75,7 @@ class _AnimatedHumidityCardState extends State<AnimatedHumidityCard>
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.15),
+                  color: color.withAlphaFromOpacity(0.15),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Icon(
@@ -203,8 +203,8 @@ class _RainDropsPainter extends CustomPainter {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            color.withOpacity(0.1),
-            color.withOpacity(0.25),
+            color.withAlphaFromOpacity(0.1),
+            color.withAlphaFromOpacity(0.25),
           ],
         ).createShader(Rect.fromLTWH(0, size.height - puddleHeight, size.width, puddleHeight));
 
@@ -255,14 +255,14 @@ class _RainDropsPainter extends CustomPainter {
       dropPath.close();
 
       final dropPaint = Paint()
-        ..color = color.withOpacity(opacity)
+        ..color = color.withAlphaFromOpacity(opacity)
         ..style = PaintingStyle.fill;
 
       canvas.drawPath(dropPath, dropPaint);
 
       // Add highlight to make it look glossy
       final highlightPaint = Paint()
-        ..color = Colors.white.withOpacity(opacity * 0.3)
+        ..color = Colors.white.withAlphaFromOpacity(opacity * 0.3)
         ..style = PaintingStyle.fill;
 
       canvas.drawCircle(
@@ -274,7 +274,7 @@ class _RainDropsPainter extends CustomPainter {
       // Draw motion streak for faster drops
       if (drop.speed > 0.5) {
         final streakPaint = Paint()
-          ..color = color.withOpacity(opacity * 0.2)
+          ..color = color.withAlphaFromOpacity(opacity * 0.2)
           ..strokeWidth = drop.size * 0.3
           ..strokeCap = StrokeCap.round;
 
@@ -299,7 +299,7 @@ class _RainDropsPainter extends CustomPainter {
 
     // Draw small splash ripple
     final splashPaint = Paint()
-      ..color = color.withOpacity(opacity)
+      ..color = color.withAlphaFromOpacity(opacity)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
 
@@ -312,7 +312,7 @@ class _RainDropsPainter extends CustomPainter {
       final particleY = position.dy + math.sin(angle) * splashSize * 0.5 - progress * 3;
 
       final particlePaint = Paint()
-        ..color = color.withOpacity(opacity * 0.8)
+        ..color = color.withAlphaFromOpacity(opacity * 0.8)
         ..style = PaintingStyle.fill;
 
       canvas.drawCircle(

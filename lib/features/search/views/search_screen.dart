@@ -60,7 +60,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withAlphaFromOpacity(0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
@@ -85,7 +85,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withAlphaFromOpacity(0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
@@ -155,7 +155,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withAlphaFromOpacity(0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
@@ -185,7 +185,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
+                            color: Colors.black.withAlphaFromOpacity(0.3),
                             blurRadius: 8,
                             offset: const Offset(0, 2),
                           ),
@@ -279,7 +279,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: isSelected
-              ? const Color(0xFF3B82F6).withOpacity(0.2)
+              ? const Color(0xFF3B82F6).withAlphaFromOpacity(0.2)
               : SkyeColors.deepSpace,
           borderRadius: BorderRadius.circular(12),
           border: isSelected
@@ -332,7 +332,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withAlphaFromOpacity(0.3),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 import '../theme/skye_theme.dart';
+import 'dart:math' as math;
 import 'glass_card.dart';
 
 /// Compact animated pressure card with rising gauge meter
@@ -110,7 +110,7 @@ class _PressureGaugePainter extends CustomPainter {
 
     // Draw background arc
     final bgPaint = Paint()
-      ..color = color.withOpacity(0.1)
+      ..color = color.withAlphaFromOpacity(0.1)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 10
       ..strokeCap = StrokeCap.round;
@@ -130,7 +130,7 @@ class _PressureGaugePainter extends CustomPainter {
     final valuePaint = Paint()
       ..shader = LinearGradient(
         colors: [
-          color.withOpacity(0.6),
+          color.withAlphaFromOpacity(0.6),
           color,
         ],
       ).createShader(Rect.fromCircle(center: center, radius: radius))
@@ -182,7 +182,7 @@ class _PressureGaugePainter extends CustomPainter {
       );
 
       final tickPaint = Paint()
-        ..color = color.withOpacity(0.3)
+        ..color = color.withAlphaFromOpacity(0.3)
         ..strokeWidth = 2
         ..strokeCap = StrokeCap.round;
 
