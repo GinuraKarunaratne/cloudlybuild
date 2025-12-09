@@ -174,7 +174,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
       width: double.infinity,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF242424), Color(0xFF0A0A0A)],
+          colors: [SkyeColors.surfaceMid, SkyeColors.deepSpace],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
@@ -240,7 +240,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                       children: [
                         const Icon(
                           Icons.location_on_rounded,
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: SkyeColors.whitePure,
                           size: 20,
                         ),
                         const SizedBox(width: 6),
@@ -248,7 +248,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                           child: Text(
                             weather.cityName,
                             style: const TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: SkyeColors.whitePure,
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 0.5,
@@ -262,10 +262,10 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                     const SizedBox(height: 8),
 
                     // Today's Date
-                    Text(
-                      DateFormat('EEEE, MMM dd').format(DateTime.now()),
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
+                      Text(
+                        DateFormat('EEEE, MMM dd').format(DateTime.now()),
+                        style: const TextStyle(
+                          color: SkyeColors.whitePure,
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
@@ -393,7 +393,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: const Color(0xFFFFFFFF), size: 28),
+          Icon(icon, color: SkyeColors.whitePure, size: 28),
           const SizedBox(height: 14),
           Text(
             value,
@@ -443,7 +443,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: Color(0xFFFAFAFA),
+              color: SkyeColors.whiteFA,
             ),
           ),
           const SizedBox(height: 16),
@@ -477,9 +477,9 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: SkyeColors.cardColor, // New card color
+        color: SkyeColors.surfaceMid,
         border: isNow
-            ? Border.all(color: const Color(0xFFFFFFFF), width: 2)
+            ? Border.all(color: SkyeColors.whitePure, width: 2)
             : null,
       ),
       child: Column(
@@ -491,7 +491,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
             style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: Color(0xFFF6F6F6),
+              color: SkyeColors.whiteF6,
             ),
           ),
           const SizedBox(height: 4),
@@ -506,7 +506,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: Color(0xFFFAFAFA),
+              color: SkyeColors.whiteFA,
             ),
           ),
         ],
@@ -521,7 +521,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
 
     return Container(
       decoration: BoxDecoration(
-        color: SkyeColors.cardColor,
+        color: SkyeColors.surfaceMid,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -543,7 +543,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFFFAFAFA),
+                  color: SkyeColors.whiteFA,
                 ),
               ),
               GestureDetector(
@@ -611,7 +611,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
             const Icon(
               Icons.water_drop,
               size: 14,
-              color: Color(0xFFFFFFFF),
+              color: SkyeColors.whitePure,
             ),
             const SizedBox(width: 4),
             Text(
@@ -629,9 +629,9 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
           Text(
             '${day.minTemp.round()}° / ${day.maxTemp.round()}°',
             style: const TextStyle(
-              fontSize: 14,
+              fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: Color(0xFFFAFAFA),
+              color: SkyeColors.whiteFA,
             ),
           ),
         ],
@@ -644,7 +644,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
   Widget _buildSunTimesCard(WeatherModel weather) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF232125), // New card color
+        color: SkyeColors.surfaceMid, // Card color
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -684,15 +684,15 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
     required String time,
   }) {
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF1C1A1F), // Behind container color
+        color: SkyeColors.surfaceMid,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: const Color(0xFFFFFFFF), size: 28),
+          Icon(icon, color: SkyeColors.whitePure, size: 28),
           const SizedBox(width: 10),
           Flexible(
             child: Column(
@@ -757,8 +757,8 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: const Color(0xFF232125),
-          borderRadius: BorderRadius.circular(12),
+          color: SkyeColors.surfaceMid,
+          borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.3),
@@ -769,7 +769,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
         ),
         child: Icon(
           icon,
-          color: const Color(0xFFFFFFFF),
+          color: SkyeColors.whitePure,
           size: 22,
         ),
       ),
