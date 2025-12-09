@@ -7,7 +7,7 @@ import '../../../data/models/weather_model.dart';
 import '../../../data/models/forecast_model.dart';
 import '../../../data/models/uv_data_model.dart';
 
-class WeatherQualitySection extends StatelessWidget {
+class WeatherQualitySection extends StatefulWidget {
   final WeatherModel? weather;
   final ForecastModel? forecast;
   final UVDataModel? uvData;
@@ -19,6 +19,39 @@ class WeatherQualitySection extends StatelessWidget {
     this.uvData,
   }) : super(key: key);
 
+  @override
+  State<WeatherQualitySection> createState() => _WeatherQualitySectionState();
+}
+
+class _WeatherQualitySectionState extends State<WeatherQualitySection> with TickerProviderStateMixin {
+  late AnimationController _scoreAnimationController;
+  late Animation<double> _scoreAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _scoreAnimationController = AnimationController(
+      duration: const Duration(milliseconds: 1200),
+      vsync: this,
+    );
+
+    final score = _computeScore();
+    _scoreAnimation = Tween<double>(begin: 0, end: score / 100.0).animate(
+      CurvedAnimation(parent: _scoreAnimationController, curve: Curves.easeOut),
+    );
+
+    // Start animation after widget builds
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scoreAnimationController.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _scoreAnimationController.dispose();
+    super.dispose();
+  }
+
   // Compute a score (0-100) based on several factors:
   // - Temperature comfort (ideal between 18-25 C)
   // - Humidity (ideal 30-60%)
@@ -26,18 +59,18 @@ class WeatherQualitySection extends StatelessWidget {
   // - Precipitation probability (lower is better)
   // - UV index (lower is better for outdoor comfort/safety)
   int _computeScore() {
-    if (weather == null) return 0;
+    if (widget.weather == null) return 0;
 
     double score = 0.0;
 
     // Temperature comfort: optimal at 21°C, falloff +/-10°C
-    final temp = weather!.feelsLike;
+    final temp = widget.weather!.feelsLike;
     final tempDiff = (temp - 21.0).abs();
     final tempScore = (1.0 - (tempDiff / 10.0)).clamp(0.0, 1.0) * 30.0;
     score += tempScore;
 
     // Humidity: optimal 30-60
-    final humidity = weather!.humidity.toDouble();
+    final humidity = widget.weather!.humidity.toDouble();
     double humidityScore;
     if (humidity < 30) {
       humidityScore = (humidity / 30.0) * 10.0; // lower is worse below 30
@@ -49,22 +82,22 @@ class WeatherQualitySection extends StatelessWidget {
     score += humidityScore;
 
     // Wind: ideal < 5 m/s
-    final wind = weather!.windSpeed;
+    final wind = widget.weather!.windSpeed;
     final windScore = (1.0 - (wind / 15.0)).clamp(0.0, 1.0) * 15.0;
     score += windScore;
 
     // Precipitation: use today's pop if present, else use forecast average
     double pop = 0.0;
-    if (forecast != null && forecast!.dailyForecasts.isNotEmpty) {
-      pop = forecast!.dailyForecasts.first.pop; // today's pop
+    if (widget.forecast != null && widget.forecast!.dailyForecasts.isNotEmpty) {
+      pop = widget.forecast!.dailyForecasts.first.pop; // today's pop
     }
     final popScore = (1.0 - pop).clamp(0.0, 1.0) * 20.0;
     score += popScore;
 
     // UV safety: penalize high UV (if available)
     double uvPenalty = 0.0;
-    if (uvData != null) {
-      final u = uvData!.uvIndex;
+    if (widget.uvData != null) {
+      final u = widget.uvData!.uvIndex;
       uvPenalty = (1.0 - (u / 11.0)).clamp(0.0, 1.0) * 25.0;
     } else {
       // If no UV data, give a neutral mid contribution
@@ -124,10 +157,15 @@ class WeatherQualitySection extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Gauge
-              WeatherQualityGauge(
-                progress: score / 100.0,
-                size: 170,
+              // Gauge with animated progress
+              AnimatedBuilder(
+                animation: _scoreAnimation,
+                builder: (context, child) {
+                  return WeatherQualityGauge(
+                    progress: _scoreAnimation.value,
+                    size: 170,
+                  );
+                },
               ),
 
               const SizedBox(width: 16),
@@ -148,7 +186,7 @@ class WeatherQualitySection extends StatelessWidget {
                     const SizedBox(height: 12),
 
                     // Small metrics summary displayed horizontally; allow horizontal scroll on overflow
-                    if (weather != null) ...[
+                    if (widget.weather != null) ...[
                       const SizedBox(height: 8),
                       SizedBox(
                         height: 40,
@@ -157,14 +195,14 @@ class WeatherQualitySection extends StatelessWidget {
                           physics: const BouncingScrollPhysics(),
                           child: Row(
                             children: [
-                              _metricChip('Temp', '${weather!.temperature.round()}°'),
+                              _metricChip('Temp', '${widget.weather!.temperature.round()}°'),
                               const SizedBox(width: 12),
-                              _metricChip('Humidity', '${weather!.humidity}%'),
+                              _metricChip('Humidity', '${widget.weather!.humidity}%'),
                               const SizedBox(width: 12),
-                              _metricChip('Wind', '${weather!.windSpeed.toStringAsFixed(1)} m/s'),
-                              if (uvData != null) ...[
+                              _metricChip('Wind', '${widget.weather!.windSpeed.toStringAsFixed(1)} m/s'),
+                              if (widget.uvData != null) ...[
                                 const SizedBox(width: 12),
-                                _metricChip('UV', uvData!.uvIndex.toStringAsFixed(1)),
+                                _metricChip('UV', widget.uvData!.uvIndex.toStringAsFixed(1)),
                               ],
                             ],
                           ),

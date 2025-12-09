@@ -4,7 +4,7 @@ import '../models/activity_model.dart';
 import '../utils/activity_status_evaluator.dart';
 import '../widgets/add_activity_dialog.dart';
 
-class ActivityCard extends StatelessWidget {
+class ActivityCard extends StatefulWidget {
   final Activity activity;
   final double currentTemp;
   final double currentWind;
@@ -25,30 +25,57 @@ class ActivityCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ActivityCard> createState() => _ActivityCardState();
+}
+
+class _ActivityCardState extends State<ActivityCard> with TickerProviderStateMixin {
+  late AnimationController _pulseController;
+  late Animation<double> _pulseAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _pulseController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    )..repeat(reverse: true);
+
+    _pulseAnimation = Tween<double>(begin: 0.95, end: 1.05).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _pulseController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final status = ActivityStatusEvaluator.evaluateStatus(
-      activity,
-      currentTemp: currentTemp,
-      currentWind: currentWind,
-      currentVisibility: currentVisibility,
-      currentUV: currentUV,
+      widget.activity,
+      currentTemp: widget.currentTemp,
+      currentWind: widget.currentWind,
+      currentVisibility: widget.currentVisibility,
+      currentUV: widget.currentUV,
     );
 
     final statusLabel = ActivityStatusEvaluator.getStatusLabel(status);
     final statusIcon = ActivityStatusEvaluator.getStatusIcon(status);
     final conditionSummary = ActivityStatusEvaluator.buildConditionSummary(
-      activity,
-      currentTemp: currentTemp,
-      currentWind: currentWind,
-      currentVisibility: currentVisibility,
-      currentUV: currentUV,
+      widget.activity,
+      currentTemp: widget.currentTemp,
+      currentWind: widget.currentWind,
+      currentVisibility: widget.currentVisibility,
+      currentUV: widget.currentUV,
     );
 
     // create a small match percentage based on conditions met
-    bool tempOk = currentTemp >= activity.minTemp && currentTemp <= activity.maxTemp;
-    bool windOk = currentWind <= activity.maxWind;
-    bool visibilityOk = currentVisibility >= activity.minVisibility;
-    bool uvOk = currentUV <= activity.maxUV;
+    bool tempOk = widget.currentTemp >= widget.activity.minTemp && widget.currentTemp <= widget.activity.maxTemp;
+    bool windOk = widget.currentWind <= widget.activity.maxWind;
+    bool visibilityOk = widget.currentVisibility >= widget.activity.minVisibility;
+    bool uvOk = widget.currentUV <= widget.activity.maxUV;
 
     int met = 0;
     if (tempOk) met++;
@@ -68,16 +95,25 @@ class ActivityCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Left accent + badge
-          Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              color: ActivityStatusEvaluator.getStatusColor(status).withAlpha(30),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Center(
-              child: Text(statusIcon, style: const TextStyle(fontSize: 26)),
+          // Left accent + badge with pulse animation
+          AnimatedBuilder(
+            animation: _pulseAnimation,
+            builder: (context, child) {
+              return Transform.scale(
+                scale: _pulseAnimation.value,
+                child: child,
+              );
+            },
+            child: Container(
+              width: 64,
+              height: 64,
+              decoration: BoxDecoration(
+                color: ActivityStatusEvaluator.getStatusColor(status).withAlpha(30),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Center(
+                child: Text(statusIcon, style: const TextStyle(fontSize: 26)),
+              ),
             ),
           ),
           const SizedBox(width: 12),
@@ -91,7 +127,7 @@ class ActivityCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        activity.name,
+                        widget.activity.name,
                         style: SkyeTypography.subtitle.copyWith(color: SkyeColors.textPrimary),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -128,9 +164,9 @@ class ActivityCard extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => AddActivityDialog(
-                        editingActivity: activity,
+                        editingActivity: widget.activity,
                         onSave: (updated) {
-                          onEdit(updated);
+                          widget.onEdit(updated);
                           Navigator.pop(context);
                         },
                       ),
@@ -150,10 +186,10 @@ class ActivityCard extends StatelessWidget {
                     builder: (context) => AlertDialog(
                       backgroundColor: SkyeColors.surfaceMid,
                       title: Text('Delete Activity?', style: SkyeTypography.subtitle),
-                      content: Text('Are you sure you want to delete "${activity.name}"?', style: SkyeTypography.body),
+                      content: Text('Are you sure you want to delete "${widget.activity.name}"?', style: SkyeTypography.body),
                       actions: [
                         TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel', style: SkyeTypography.label.copyWith(color: SkyeColors.textSecondary))),
-                        TextButton(onPressed: () { onDelete(activity.id); Navigator.pop(context); }, child: Text('Delete', style: SkyeTypography.label.copyWith(color: SkyeColors.error))),
+                        TextButton(onPressed: () { widget.onDelete(widget.activity.id); Navigator.pop(context); }, child: Text('Delete', style: SkyeTypography.label.copyWith(color: SkyeColors.error))),
                       ],
                     ),
                   );
