@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "skye_build" "\0"
+            VALUE "FileDescription", "cloudly" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "skye_build" "\0"
+            VALUE "InternalName", "cloudly" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "skye_build.exe" "\0"
-            VALUE "ProductName", "skye_build" "\0"
+            VALUE "OriginalFilename", "cloudly.exe" "\0"
+            VALUE "ProductName", "cloudly" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

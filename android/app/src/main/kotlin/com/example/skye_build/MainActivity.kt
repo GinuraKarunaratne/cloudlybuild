@@ -1,4 +1,4 @@
-package com.example.skye_build
+package com.example.cloudly
 
 import io.flutter.embedding.android.FlutterActivity
 

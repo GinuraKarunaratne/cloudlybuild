@@ -1,6 +1,6 @@
 {
-    "name": "skye_build",
-    "short_name": "skye_build",
+    "name": "cloudly",
+    "short_name": "cloudly",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
