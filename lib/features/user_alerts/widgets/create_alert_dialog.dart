@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../data/models/user_alert_model.dart';
 import '../viewmodels/user_alerts_viewmodel.dart';
-import '../../../core/theme/skye_colors.dart';
+import '../../../core/theme/skye_theme.dart';
 
 class CreateAlertDialog extends ConsumerStatefulWidget {
   final UserAlertModel? existingAlert;

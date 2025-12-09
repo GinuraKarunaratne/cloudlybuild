@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import '../../../core/theme/skye_colors.dart';
-import '../../../core/theme/skye_typography.dart';
+import '../../../core/theme/skye_theme.dart';
 import '../../../core/widgets/glass_card.dart';
 import '../../../core/widgets/hourly_temp_trend_painter.dart';
 import '../../../data/models/forecast_model.dart';

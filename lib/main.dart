@@ -10,9 +10,9 @@ void main() {
   // Set system UI overlay style for immersive experience
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
+      statusBarColor: SkyeColors.transparent,
       statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarColor: SkyeColors.transparent,
       systemNavigationBarIconBrightness: Brightness.light,
     ),
   );

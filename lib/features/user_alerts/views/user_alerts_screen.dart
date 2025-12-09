@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../viewmodels/user_alerts_viewmodel.dart';
 import '../widgets/user_alert_card.dart';
 import '../widgets/create_alert_dialog.dart';
-import '../../../core/theme/skye_colors.dart';
+import '../../../core/theme/skye_theme.dart';
 
 class UserAlertsScreen extends ConsumerWidget {
   const UserAlertsScreen({super.key});
@@ -49,7 +49,7 @@ class UserAlertsScreen extends ConsumerWidget {
               color: SkyeColors.surfaceDark,
               border: Border(
                 top: BorderSide(
-                  color: Colors.white.withOpacity(0.1),
+                  color: SkyeColors.whitePure.withOpacity(0.1),
                   width: 1,
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../theme/skye_colors.dart';
+import '../theme/skye_theme.dart';
 
 /// Premium glassmorphism card with blur and noise texture
 class GlassCard extends StatelessWidget {

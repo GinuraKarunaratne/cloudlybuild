@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../data/models/user_alert_model.dart';
-import '../../../core/theme/skye_colors.dart';
-import '../../../core/theme/skye_typography.dart';
+import '../../../core/theme/skye_theme.dart';
 import '../../../core/widgets/glass_card.dart';
 
 class UserAlertCard extends StatelessWidget {

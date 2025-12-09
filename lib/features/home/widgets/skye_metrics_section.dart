@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
-import '../../../core/theme/skye_colors.dart';
-import '../../../core/theme/skye_typography.dart';
+import '../../../core/theme/skye_theme.dart';
 import '../../../core/widgets/animated_wind_card.dart';
 import '../../../core/widgets/animated_humidity_card.dart';
 import '../../../core/widgets/animated_pressure_card.dart';

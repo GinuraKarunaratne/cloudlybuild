@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import '../theme/skye_colors.dart';
-import '../theme/skye_typography.dart';
+import '../theme/skye_theme.dart';
 import 'glass_card.dart';
 
 /// Compact animated visibility card with fog/mist layers

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/skye_colors.dart';
-import '../theme/skye_typography.dart';
+import '../theme/skye_theme.dart';
 import 'glass_card.dart';
 
 /// Interactive settings tile with glassmorphic design

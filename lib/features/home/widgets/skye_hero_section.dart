@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
-import '../../../core/theme/skye_colors.dart';
-import '../../../core/theme/skye_typography.dart';
+import '../../../core/theme/skye_theme.dart';
 import '../../../core/utils/skye_weather_utils.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/weather_formatters.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/skye_colors.dart';
+import '../theme/skye_theme.dart';
 import '../../data/models/uv_data_model.dart';
 
 class UVUtils {
