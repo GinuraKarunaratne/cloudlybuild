@@ -44,55 +44,96 @@ class ActivityCard extends StatelessWidget {
       currentUV: currentUV,
     );
 
+    // create a small match percentage based on conditions met
+    bool tempOk = currentTemp >= activity.minTemp && currentTemp <= activity.maxTemp;
+    bool windOk = currentWind <= activity.maxWind;
+    bool visibilityOk = currentVisibility >= activity.minVisibility;
+    bool uvOk = currentUV <= activity.maxUV;
+
+    int met = 0;
+    if (tempOk) met++;
+    if (windOk) met++;
+    if (visibilityOk) met++;
+    if (uvOk) met++;
+
+    final double matchPercent = met / 4.0;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: SkyeColors.surfaceMid,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: SkyeColors.glassBorder),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          // Header: Status badge + Name + Edit/Delete buttons
-          Row(
-            children: [
-              // Status badge
-              Text(statusIcon, style: const TextStyle(fontSize: 20)),
-              const SizedBox(width: 10),
+          // Left accent + badge
+          Container(
+            width: 64,
+            height: 64,
+            decoration: BoxDecoration(
+              color: ActivityStatusEvaluator.getStatusColor(status).withAlpha(30),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Center(
+              child: Text(statusIcon, style: const TextStyle(fontSize: 26)),
+            ),
+          ),
+          const SizedBox(width: 12),
 
-              // Activity name
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          // Main content
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Text(
-                      activity.name,
-                      style: SkyeTypography.subtitle.copyWith(color: SkyeColors.textPrimary),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      statusLabel,
-                      style: SkyeTypography.caption.copyWith(
-                        color: ActivityStatusEvaluator.getStatusColor(status),
+                    Expanded(
+                      child: Text(
+                        activity.name,
+                        style: SkyeTypography.subtitle.copyWith(color: SkyeColors.textPrimary),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    const SizedBox(width: 8),
+                    Text(statusLabel, style: SkyeTypography.caption.copyWith(color: ActivityStatusEvaluator.getStatusColor(status))),
                   ],
                 ),
-              ),
+                const SizedBox(height: 8),
+                Text(conditionSummary, style: SkyeTypography.caption.copyWith(color: SkyeColors.textTertiary), maxLines: 2, overflow: TextOverflow.ellipsis),
+                const SizedBox(height: 8),
+                // small progress bar showing how many conditions met
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: LinearProgressIndicator(
+                    value: matchPercent,
+                    minHeight: 8,
+                    backgroundColor: SkyeColors.behindContainer,
+                    valueColor: AlwaysStoppedAnimation(ActivityStatusEvaluator.getStatusColor(status)),
+                  ),
+                ),
+              ],
+            ),
+          ),
 
-              // Edit button
+          // Buttons
+          const SizedBox(width: 12),
+          Column(
+            children: [
               GestureDetector(
                 onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: (context) => AddActivityDialog(
-                      editingActivity: activity,
-                      onSave: onEdit,
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddActivityDialog(
+                        editingActivity: activity,
+                        onSave: (updated) {
+                          onEdit(updated);
+                          Navigator.pop(context);
+                        },
+                      ),
                     ),
                   );
                 },
@@ -101,60 +142,28 @@ class ActivityCard extends StatelessWidget {
                   child: Icon(Icons.edit, size: 18, color: SkyeColors.textSecondary),
                 ),
               ),
-
-              // Delete button
+              const SizedBox(height: 6),
               GestureDetector(
                 onTap: () {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
                       backgroundColor: SkyeColors.surfaceMid,
-                      title: Text(
-                        'Delete Activity?',
-                        style: SkyeTypography.subtitle,
-                      ),
-                      content: Text(
-                        'Are you sure you want to delete "${activity.name}"?',
-                        style: SkyeTypography.body,
-                      ),
+                      title: Text('Delete Activity?', style: SkyeTypography.subtitle),
+                      content: Text('Are you sure you want to delete "${activity.name}"?', style: SkyeTypography.body),
                       actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: Text(
-                            'Cancel',
-                            style: SkyeTypography.label.copyWith(color: SkyeColors.textSecondary),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            onDelete(activity.id);
-                            Navigator.pop(context);
-                          },
-                          child: Text(
-                            'Delete',
-                            style: SkyeTypography.label.copyWith(color: SkyeColors.error),
-                          ),
-                        ),
+                        TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel', style: SkyeTypography.label.copyWith(color: SkyeColors.textSecondary))),
+                        TextButton(onPressed: () { onDelete(activity.id); Navigator.pop(context); }, child: Text('Delete', style: SkyeTypography.label.copyWith(color: SkyeColors.error))),
                       ],
                     ),
                   );
                 },
                 child: Container(
                   padding: const EdgeInsets.all(8),
-                  child: const Icon(Icons.delete, size: 18, color: SkyeColors.error),
+                  child: Icon(Icons.delete, size: 18, color: SkyeColors.error),
                 ),
               ),
             ],
-          ),
-
-          const SizedBox(height: 10),
-
-          // Condition summary
-          Text(
-            conditionSummary,
-            style: SkyeTypography.caption.copyWith(color: SkyeColors.textTertiary),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

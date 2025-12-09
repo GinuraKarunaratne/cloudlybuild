@@ -75,26 +75,35 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: SkyeColors.surfaceDark,
-      child: SingleChildScrollView(
-        child: Padding(
+    return Scaffold(
+      backgroundColor: SkyeColors.surfaceDark,
+      appBar: AppBar(
+        backgroundColor: SkyeColors.surfaceDark,
+        elevation: 0,
+        title: Text(widget.editingActivity != null ? 'Edit Activity' : 'Add New Activity', style: SkyeTypography.title),
+        leading: IconButton(
+          icon: Icon(Icons.close, color: SkyeColors.textPrimary),
+          onPressed: () => Navigator.pop(context),
+        ),
+        actions: [
+          TextButton(
+            onPressed: _save,
+            child: Text(widget.editingActivity != null ? 'Update' : 'Save', style: SkyeTypography.label.copyWith(color: SkyeColors.textSecondary)),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
           padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
             left: 20,
             right: 20,
             top: 20,
           ),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
-              Text(
-                widget.editingActivity != null ? 'Edit Activity' : 'Add New Activity',
-                style: SkyeTypography.title.copyWith(color: SkyeColors.textPrimary),
-              ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 4),
 
               // Activity Name
               Text('Activity Name', style: SkyeTypography.label.copyWith(color: SkyeColors.textSecondary)),
@@ -204,39 +213,20 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
               ),
               const SizedBox(height: 24),
 
-              // Buttons
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: SkyeColors.behindContainer,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                      ),
-                      child: Text(
-                        'Cancel',
-                        style: SkyeTypography.subtitle.copyWith(color: SkyeColors.textPrimary),
-                      ),
-                    ),
+              const SizedBox(height: 12),
+              // Buttons at bottom handled by AppBar action; also provide a visible save button
+              Center(
+                child: ElevatedButton(
+                  onPressed: _save,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: SkyeColors.textSecondary,
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: _save,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: SkyeColors.textSecondary,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                      ),
-                      child: Text(
-                        widget.editingActivity != null ? 'Update' : 'Save Activity',
-                        style: SkyeTypography.subtitle.copyWith(color: SkyeColors.deepSpace),
-                      ),
-                    ),
-                  ),
-                ],
+                  child: Text(widget.editingActivity != null ? 'Update Activity' : 'Save Activity', style: SkyeTypography.subtitle.copyWith(color: SkyeColors.deepSpace)),
+                ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
             ],
           ),
         ),

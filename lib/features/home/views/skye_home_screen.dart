@@ -999,8 +999,9 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
           );
         }
 
-        // Show perfect/caution/notRecommended counts
+        // Compute activity statuses and collect perfect names for banner
         int perfect = 0, caution = 0, notRecommended = 0;
+        final List<String> perfectNames = [];
         
         for (var activity in activities) {
           final status = ActivityStatusEvaluator.evaluateStatus(
@@ -1014,6 +1015,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
           switch (status) {
             case ActivityStatus.perfect:
               perfect++;
+              perfectNames.add(activity.name);
               break;
             case ActivityStatus.caution:
               caution++;
@@ -1022,6 +1024,118 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
               notRecommended++;
               break;
           }
+        }
+
+        // If perfect activities exist, show prominent banner first
+        if (perfect > 0) {
+          final namesToShow = perfectNames.take(2).toList();
+          final more = perfectNames.length - namesToShow.length;
+
+          return Column(
+            children: [
+              // Ideal Weather Banner
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: SkyeColors.surfaceMid,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: SkyeColors.glassBorder),
+                  boxShadow: [
+                    BoxShadow(color: SkyeColors.black.withAlphaFromOpacity(0.3), blurRadius: 10, offset: const Offset(0, 4)),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(color: SkyeColors.success.withAlphaFromOpacity(0.12), borderRadius: BorderRadius.circular(12)),
+                      child: const Text('🏆', style: TextStyle(fontSize: 20)),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Ideal Weather', style: SkyeTypography.subtitle),
+                          const SizedBox(height: 6),
+                          Text(
+                            '${namesToShow.join(', ')}${more > 0 ? ' +$more more' : ''}',
+                            style: SkyeTypography.body.copyWith(color: SkyeColors.textSecondary),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: _openActivities,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(color: SkyeColors.behindContainer, borderRadius: BorderRadius.circular(12)),
+                        child: Text('View', style: SkyeTypography.label.copyWith(color: SkyeColors.textPrimary)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              // Compact summary below
+              Container(
+          decoration: BoxDecoration(
+            color: SkyeColors.surfaceMid,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: SkyeColors.glassBorder),
+            boxShadow: [
+              BoxShadow(
+                color: SkyeColors.black.withAlphaFromOpacity(0.3),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('My Activities', style: SkyeTypography.subtitle),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      if (perfect > 0) ...[
+                        Text('🟢 $perfect', style: SkyeTypography.caption.copyWith(color: SkyeColors.textSecondary)),
+                        const SizedBox(width: 12),
+                      ],
+                      if (caution > 0) ...[
+                        Text('🟡 $caution', style: SkyeTypography.caption.copyWith(color: SkyeColors.textSecondary)),
+                        const SizedBox(width: 12),
+                      ],
+                      if (notRecommended > 0) ...[
+                        Text('🔴 $notRecommended', style: SkyeTypography.caption.copyWith(color: SkyeColors.textSecondary)),
+                      ],
+                    ],
+                  ),
+                ],
+              ),
+              GestureDetector(
+                onTap: _openActivities,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: SkyeColors.behindContainer,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text('View All', style: SkyeTypography.label.copyWith(color: SkyeColors.textPrimary)),
+                ),
+              ),
+            ],
+          ),
+            ),
+            ],
+          );
         }
 
         return Container(
