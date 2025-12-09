@@ -346,7 +346,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
               Expanded(
                 child: _buildMetricItem(
                   icon: Icons.air,
-                  label: 'Wind',
+                  label: 'Wind Speed',
                   value: '${weather.windSpeed.toStringAsFixed(1)} m/s',
                 ),
               ),
@@ -394,8 +394,7 @@ class _SkyeHomeScreenState extends ConsumerState<SkyeHomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, color: const Color(0xFFFFFFFF), size: 28),
-                    Icon(icon, color: SkyeColors.whitePure, size: 28),
-          const SizedBox(height: 12),
+          const SizedBox(height: 14),
           Text(
             value,
             style: const TextStyle(

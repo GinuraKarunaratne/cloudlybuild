@@ -170,7 +170,7 @@ class SkyeHeroSection extends ConsumerWidget {
           ),
           _buildDivider(),
           _buildQuickStat(
-            'Wind',
+            'Wind Speed',
             weather.windSpeed.formatWindSpeed(settings),
           ),
         ],
