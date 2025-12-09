@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
-import '../../../core/theme/skye_theme.dart';
+import '../../../core/theme/cloudly_theme.dart';
 import '../../../core/widgets/animated_wind_card.dart';
 import '../../../core/widgets/animated_humidity_card.dart';
 import '../../../core/widgets/animated_pressure_card.dart';
 import '../../../core/widgets/animated_visibility_card.dart';
-import '../../../core/utils/skye_weather_utils.dart';
+import '../../../core/utils/cloudly_weather_utils.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/weather_formatters.dart';
 import '../../../data/models/weather_model.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../../core/theme/skye_theme.dart';
+import '../../../core/theme/cloudly_theme.dart';
 import '../viewmodels/forecast_viewmodel.dart';
 import '../../home/viewmodels/home_viewmodel.dart';
 

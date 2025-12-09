@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/theme/skye_theme.dart';
+import '../../../core/theme/cloudly_theme.dart';
 import '../../../data/models/weather_alert_model.dart';
 import '../viewmodels/alerts_viewmodel.dart';
 import '../../home/viewmodels/home_viewmodel.dart';

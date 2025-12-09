@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../viewmodels/home_viewmodel.dart';
-import '../../forecast/views/skye_forecast_screen.dart';
-import '../../settings/views/skye_settings_screen.dart';
-import '../../alerts/views/skye_alerts_screen.dart';
+import '../../forecast/views/cloudly_forecast_screen.dart';
+import '../../settings/views/cloudly_settings_screen.dart';
+import '../../alerts/views/cloudly_alerts_screen.dart';
 import '../../search/views/search_screen.dart';
 import '../widgets/weather_quality_section.dart';
 import '../../alerts/viewmodels/alerts_viewmodel.dart';
@@ -12,11 +12,11 @@ import '../../activities/views/activities_list_screen.dart';
 import '../../activities/providers/activities_provider.dart';
 import '../../activities/utils/activity_status_evaluator.dart';
 import '../../activities/models/activity_model.dart';
-import '../../../core/utils/skye_weather_utils.dart';
+import '../../../core/utils/cloudly_weather_utils.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../data/models/weather_model.dart';
 import '../../../data/models/forecast_model.dart';
-import '../../../core/theme/skye_theme.dart';
+import '../../../core/theme/cloudly_theme.dart';
 
 /// REDESIGNED Home Screen
 /// Complete UI overhaul with new hero section and card-based layout

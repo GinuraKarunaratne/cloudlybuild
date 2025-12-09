@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/skye_theme.dart';
+import '../theme/cloudly_theme.dart';
 import '../../data/models/weather_model.dart';
 
 /// Weather utilities for Skye design system
